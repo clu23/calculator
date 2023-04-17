@@ -1,3 +1,7 @@
+let FirstNumber=null;
+let SecondNumber=null;
+let operator=null;
+
 const add = function(a,b) {
     return(a+b)	
   };
@@ -16,4 +20,11 @@ const divide = function(a,b) {
 	return(a/b)
 };
 
-console.log(add(5,3))
+
+operate=function(first,second,operation){
+    return(operation(first,second));
+}
+
+
+
+
