@@ -77,8 +77,6 @@ function getClick(e){
  
 
 let cells = document.querySelectorAll('button');
-cells.forEach(cell => cell.addEventListener('mouseover',(evt) => evt.target.style.backgroundColor =`rgb(164, 196, 241)`, false));
-cells.forEach(cell => cell.addEventListener('mouseleave',(evt) => evt.target.style.backgroundColor =`rgb(24, 107, 224)`, false));
 
 cells.forEach(cell => cell.addEventListener('click',(evt) => getClick(evt.target), false));
 

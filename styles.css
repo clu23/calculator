@@ -43,11 +43,16 @@ div.container {
 
 
 button{
-    background-color: rgb(24, 107, 224);
-    color:black;
+    background-color: rgb(35, 50, 85);
+    color:white;
     font-weight: bold;
     border: None;
     border-radius: 100%;
     font-size: 20px;
     padding: 30px;
+}
+
+button:hover {
+	background: rgb(164, 196, 241);
+	color: #000;
 }
