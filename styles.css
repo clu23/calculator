@@ -1,20 +1,45 @@
-.container{
-  background-color: #E5E7EB;
-  display: grid;
-  align-content: center;
+.main {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  grid-gap: 4px;  
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  padding:8px;
-  margin: 30px auto;
-  border: 1px solid black;
-  height: 100%;
-  max-width: 400px;
-  border-bottom-right-radius: 5px;
-  border-bottom-right-radius: 5rpx;
+  height: 70vh;
+  min-height: 500px;
+  padding: 10px;
+  margin-top: 50px;
 }
 
+
+
+div.keys{
+  background-color: #E5E7EB;
+  display: grid;
+  grid-gap: 10px;  
+  grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+  padding: 1rem;
+}
+
+div.screen {
+  border: 5px solid #40445b;
+  color: black;
+  background: #f8f8ff;
+  padding: 10px 20px;
+  min-height: 80px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 30px;
+  text-align: right;
+  font-weight: bold;
+}
+
+div.container {
+  background: #e7e7e7;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid #40445b;
+  box-shadow: 10px 10px 10px;
+}
 
 
 button{
@@ -22,8 +47,7 @@ button{
     color:black;
     font-weight: bold;
     border: None;
-    border-radius: 50%;
-    font-size: 18px;
-    height:50px;
-    width:50px;
+    border-radius: 100%;
+    font-size: 20px;
+    padding: 30px;
 }

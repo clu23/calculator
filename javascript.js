@@ -1,7 +1,7 @@
-let FirstNumber=null;
-let SecondNumber=null;
+let firstNumber=null;
+let secondNumber=null;
 let operator=null;
-let firstNumber=0
+
 
 
 
@@ -11,7 +11,7 @@ const add = function(a,b) {
 
 
 
-const subtract = function(a,b) {
+const substract = function(a,b) {
 	return(a-b)
 };
 
@@ -30,17 +30,49 @@ operate=function(first,second,operation){
 
 function getClick(e){
   if (e.classList[0]==="digits"){
-    if (firstNumber===0){
-      firstNumber=e.value;
+    if (operator===null){
+      if (firstNumber===null){
+        firstNumber=parseInt(e.value);
+      }
+      else{
+        firstNumber=firstNumber*10+parseInt(e.value);
+      }
+    console.log(firstNumber)
     }
     else{
-      firstNumber=firstNumber+e.value;
+      if (secondNumber===null){
+        secondNumber=parseInt(e.value);
+      }
+      else{
+        secondNumber=secondNumber*10+parseInt(e.value);
+      }
+    console.log(secondNumber)
     }
-   console.log(firstNumber)
   }
   else if (e.classList[0]==="operators"){
-    console.log(e.value)
+    if (secondNumber!=null){
+      console.log(operate(firstNumber,secondNumber,operator))
+      firstNumber=operate(firstNumber,secondNumber,operator);
+      secondNumber=null;
+      operator=null;
+    }
+    if (e.id!="equals"){
+      if (e.id==="plus"){
+        operator=add;
+      }
+      else if (e.id==="minus"){
+        operator=substract;
+      }
+      else if (e.id==="multiply"){
+        operator=multiply;
+      }
+      else if (e.id==="divide"){
+        operator=divide;
+      }
+    }
+    console.log(operator)  
   }
+  
 }
  
 
