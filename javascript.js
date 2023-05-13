@@ -52,6 +52,11 @@ function clearLast(){
   lastOperationScreen.textContent='';
 }
 
+function clearAll(){
+  lastOperationScreen.textContent='';
+  currentOperationScreen.textContent='0';
+}
+
 
 
 
