@@ -3,6 +3,8 @@ let secondNumber=null;
 let operator=null;
 
 
+const lastOperationScreen = document.getElementById('lastOperationScreen')
+const currentOperationScreen = document.getElementById('currentOperationScreen')
 
 
 const add = function(a,b) {
@@ -28,23 +30,52 @@ operate=function(first,second,operation){
     return(operation(first,second));
 }
 
+function appendCurrent(string) {
+  if (currentOperationScreen.textContent=='0'){
+    currentOperationScreen.textContent=string
+  }
+  else{
+    currentOperationScreen.textContent += string;
+  } 
+}
+
+function appendLast(string){
+  lastOperationScreen.textContent += currentOperationScreen.textContent+string;
+  clearCurrent();
+}
+
+
+function clearCurrent(string){
+  currentOperationScreen.textContent='';
+}
+function clearLast(){
+  lastOperationScreen.textContent='';
+}
+
+
+
+
 function getClick(e){
   if (e.classList[0]==="digits"){
     if (operator===null){
       if (firstNumber===null){
         firstNumber=parseInt(e.value);
+        appendCurrent(firstNumber)
       }
       else{
         firstNumber=firstNumber*10+parseInt(e.value);
+        appendCurrent(parseInt(e.value))
       }
     console.log(firstNumber)
     }
     else{
       if (secondNumber===null){
         secondNumber=parseInt(e.value);
+        appendCurrent(secondNumber)
       }
       else{
         secondNumber=secondNumber*10+parseInt(e.value);
+        appendCurrent(parseInt(e.value));
       }
     console.log(secondNumber)
     }
@@ -53,21 +84,42 @@ function getClick(e){
     if (secondNumber!=null){
       console.log(operate(firstNumber,secondNumber,operator))
       firstNumber=operate(firstNumber,secondNumber,operator);
+      if (e.id!="equals"){
+        clearLast();
+        clearCurrent();
+        appendLast(firstNumber); 
+      }
+      else{
+        appendLast('=');
+        clearCurrent();
+        appendCurrent(firstNumber);
+      }
       secondNumber=null;
       operator=null;
     }
     if (e.id!="equals"){
+      if(lastOperationScreen.textContent.includes('=')){
+        clearLast();
+      }
       if (e.id==="plus"){
         operator=add;
+        appendLast('+');
+        clearCurrent();
       }
       else if (e.id==="minus"){
         operator=substract;
+        appendLast('-');
+        clearCurrent();
       }
       else if (e.id==="multiply"){
         operator=multiply;
+        appendLast('×');
+        clearCurrent();
       }
       else if (e.id==="divide"){
         operator=divide;
+        appendLast('÷');
+        clearCurrent();
       }
     }
     console.log(operator)  
