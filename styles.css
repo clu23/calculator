@@ -39,6 +39,7 @@ div.container {
   border-radius: 10px;
   border: 5px solid #40445b;
   box-shadow: 10px 10px 10px;
+  margin-top: 50px;
 }
 
 
@@ -50,6 +51,28 @@ button{
     border-radius: 100%;
     font-size: 20px;
     padding: 30px;
+}
+
+button#delete{
+    background-color: rgb(211, 153, 26);
+    color:white;
+    font-weight: bold;
+    border: None;
+    border-radius: 30px;
+    font-size: 20px;
+    padding: 30px;
+    grid-column: span 2;
+}
+
+button#erase{
+  background-color: rgb(236, 38, 38);
+  color:white;
+  font-weight: bold;
+  border: None;
+  border-radius: 30px;
+  font-size: 20px;
+  padding: 30px;
+  grid-column: span 2;
 }
 
 button:hover {
