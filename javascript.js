@@ -25,6 +25,14 @@ const divide = function(a,b) {
 	return(a/b)
 };
 
+const percentage = function(a,b){
+  return((a/100)*b)
+}
+
+const squareRoot = function(a){
+  return(Math.sqrt(a))
+}
+
 
 operate=function(first,second,operation){
     return(operation(first,second));
@@ -128,6 +136,14 @@ function getClick(e){
       }
     }
     console.log(operator)  
+  }
+  else if (e.classList[0]==="special-operators"){
+    if (e.id==="erase"){
+      clearAll();
+    }
+    else if (e.id==="delete"){
+      
+    }
   }
   
 }
