@@ -63,6 +63,9 @@ function clearLast(){
 function clearAll(){
   lastOperationScreen.textContent='';
   currentOperationScreen.textContent='0';
+  firstNumber=null;
+  secondNumber=null;
+  operator=null;
 }
 
 
@@ -134,6 +137,11 @@ function getClick(e){
         appendLast('÷');
         clearCurrent();
       }
+      else if (e.id==="percentage"){
+        operator=percentage;
+        appendLast('%');
+        clearCurrent();
+      }
     }
     console.log(operator)  
   }
@@ -142,17 +150,38 @@ function getClick(e){
       clearAll();
     }
     else if (e.id==="delete"){
-      if (currentOperationScreen.textContent!=''){
-        if (currentOperationScreen.textContent.length<2){
-          currentOperationScreen.textContent='0';
+      if (lastOperationScreen.textContent===''){
+          if (currentOperationScreen.textContent!=''){
+            if (currentOperationScreen.textContent.length<2){
+              currentOperationScreen.textContent='0';
+              firstNumber=null;
+            }
+            else{
+              firstNumber=Math.floor(firstNumber/10);
+              currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
+            }
+          }
+      }
+      else{
+        if (currentOperationScreen.textContent!=''){
+          if (currentOperationScreen.textContent.length<2){
+            currentOperationScreen.textContent='';
+            secondNumber=null;
+          }
+          else{
+            secondNumber=Math.floor(secondNumber/10);
+            currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);          
+          }
         }
         else{
-          currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
+          currentOperationScreen.textContent=lastOperationScreen.textContent.slice(0,-1); 
+          lastOperationScreen.textContent='';
+          operator=null;
+          secondNumber=null;
         }
       }
-    }
-  }
-  
+  }  
+}
 }
  
 
