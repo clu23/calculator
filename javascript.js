@@ -180,8 +180,11 @@ function getClick(e){
           secondNumber=null;
         }
       }
-  }  
-}
+    }
+    else if(e.id==='point'){
+      
+    }
+  }
 }
  
 
