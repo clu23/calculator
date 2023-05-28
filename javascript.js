@@ -142,7 +142,14 @@ function getClick(e){
       clearAll();
     }
     else if (e.id==="delete"){
-      
+      if (currentOperationScreen.textContent!=''){
+        if (currentOperationScreen.textContent.length<2){
+          currentOperationScreen.textContent='0';
+        }
+        else{
+          currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
+        }
+      }
     }
   }
   
