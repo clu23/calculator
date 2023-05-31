@@ -29,8 +29,8 @@ const percentage = function(a,b){
   return((a/100)*b)
 }
 
-const squareRoot = function(a){
-  return(Math.sqrt(a))
+const exponent = function(a,b){
+  return(a**b)
 }
 
 
@@ -142,6 +142,11 @@ function getClick(e){
         appendLast('%');
         clearCurrent();
       }
+      else if (e.id==="exponent"){
+        operator=exponent;
+        appendLast('^');
+        clearCurrent();
+      }
     }
     console.log(operator)  
   }
@@ -162,6 +167,32 @@ function getClick(e){
             }
           }
       }
+      else if(lastOperationScreen.textContent.includes('=')){
+        if (currentOperationScreen.textContent!=''){
+          if (currentOperationScreen.textContent.length<2){
+            currentOperationScreen.textContent='';
+            lastOperationScreen.textContent='';
+            firstNumber=null;
+            operator=null;
+            secondNumber=null;
+          }
+          else{
+            currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1); 
+            if (operator===null){
+              firstNumber=Math.floor(firstNumber/10);
+            }
+            else{
+              secondNumber=Math.floor(secondNumber/10);
+            }          
+          }
+        }
+        else{
+          currentOperationScreen.textContent=lastOperationScreen.textContent.slice(0,-1); 
+          lastOperationScreen.textContent='';
+          operator=null;
+          secondNumber=null;
+        }
+      }
       else{
         if (currentOperationScreen.textContent!=''){
           if (currentOperationScreen.textContent.length<2){
@@ -180,9 +211,6 @@ function getClick(e){
           secondNumber=null;
         }
       }
-    }
-    else if(e.id==='point'){
-      
     }
   }
 }
