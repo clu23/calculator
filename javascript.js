@@ -97,7 +97,6 @@ function getClick(e){
         appendCurrent(parseInt(e.value))
       }
     console.log(firstNumber)
-    console.log(pointCounter)
     }
     else{
       if (secondNumber===null){
@@ -122,6 +121,7 @@ function getClick(e){
       }
     console.log(secondNumber)
     }
+    console.log(pointCounter)
   }
   else if (e.classList[0]==="operators"){
     if (secondNumber!=null){
@@ -195,14 +195,20 @@ function getClick(e){
               firstNumber=null;
             }
             else{
-              if (Number.isInteger(firstNumber)) {
-                firstNumber=Math.floor(firstNumber/10);
+              if(currentOperationScreen.textContent.slice(-1)==="."){
+                pointCounter=0;
+                currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
               }
               else{
-                firstNumber=Math.floor(firstNumber*10**(pointCounter-2))/10**(pointCounter-2);
-                pointCounter=pointCounter-1;
+                if (Number.isInteger(firstNumber)) {
+                  firstNumber=Math.floor(firstNumber/10);
+                }
+                else{
+                  firstNumber=Math.floor(firstNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                  pointCounter=pointCounter-1;
+                }
+                currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
               }
-              currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
             }
           }
       }
@@ -218,24 +224,37 @@ function getClick(e){
           }
           else{
             if (operator===null){
-              if(Number.isInteger(firstNumber)){
-                firstNumber=Math.floor(firstNumber/10);
+              if(currentOperationScreen.textContent.slice(-1)==="."){
+                pointCounter=0;
+                currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
               }
               else{
-                firstNumber=Math.floor(firstNumber*10**(pointCounter-2))/10**(pointCounter-2);
-                pointCounter=pointCounter-1;
-              }
+                if(Number.isInteger(firstNumber)){
+                  firstNumber=Math.floor(firstNumber/10);
+                }
+                else{
+                  firstNumber=Math.floor(firstNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                  pointCounter=pointCounter-1;
+                }
+                currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1); 
+              } 
             }
             else{
-              if(Number.isInteger(secondNumber)){
-                secondNumber=Math.floor(secondNumber/10);
+              if(currentOperationScreen.textContent.slice(-1)==="."){
+                pointCounter=0;
+                currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
               }
               else{
-                secondNumber=Math.floor(secondNumber*10**(pointCounter-2))/10**(pointCounter-2);
-                pointCounter=pointCounter-1;
+                if(Number.isInteger(secondNumber)){
+                  secondNumber=Math.floor(secondNumber/10);
+                }
+                else{
+                  secondNumber=Math.floor(secondNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                  pointCounter=pointCounter-1;
+                }
+                currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1); 
               }
-            }
-            currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);         
+            }         
           }
         }
         else{
@@ -258,14 +277,20 @@ function getClick(e){
             secondNumber=null;
           }
           else{
-            if(Number.isInteger(secondNumber)){
-              secondNumber=Math.floor(secondNumber/10);
+            if(currentOperationScreen.textContent.slice(-1)==="."){
+              pointCounter=0;
+              currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
             }
             else{
-              secondNumber=Math.floor(secondNumber*10**(pointCounter-2))/10**(pointCounter-2);
-              pointCounter=pointCounter-1;
-            }
-            currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);          
+              if(Number.isInteger(secondNumber)){
+                secondNumber=Math.floor(secondNumber/10);
+              }
+              else{
+                secondNumber=Math.floor(secondNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                pointCounter=pointCounter-1;
+              }
+              currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1); 
+            }          
           }
         }
         else{
