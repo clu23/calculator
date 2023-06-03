@@ -1,6 +1,7 @@
 let firstNumber=null;
 let secondNumber=null;
 let operator=null;
+let pointCounter=0;
 
 
 const lastOperationScreen = document.getElementById('lastOperationScreen')
@@ -66,6 +67,7 @@ function clearAll(){
   firstNumber=null;
   secondNumber=null;
   operator=null;
+  pointCounter=0;
 }
 
 
@@ -75,22 +77,47 @@ function getClick(e){
   if (e.classList[0]==="digits"){
     if (operator===null){
       if (firstNumber===null){
-        firstNumber=parseInt(e.value);
-        appendCurrent(firstNumber)
+        if (pointCounter>0){
+          firstNumber=parseInt(e.value)/10;
+          pointCounter+=1;
+        }
+        else{
+          firstNumber=parseInt(e.value);
+        }
+        appendCurrent(parseInt(e.value)); 
       }
       else{
-        firstNumber=firstNumber*10+parseInt(e.value);
+        if (pointCounter>0){
+          firstNumber=firstNumber+parseInt(e.value)/(10**pointCounter);
+          pointCounter+=1;
+        }
+        else{
+          firstNumber=firstNumber*10+parseInt(e.value);
+        }
         appendCurrent(parseInt(e.value))
       }
     console.log(firstNumber)
+    console.log(pointCounter)
     }
     else{
       if (secondNumber===null){
-        secondNumber=parseInt(e.value);
-        appendCurrent(secondNumber)
+        if (pointCounter>0){
+          secondNumber=parseInt(e.value)/10;
+          pointCounter+=1;
+        }
+        else{
+          secondNumber=parseInt(e.value);
+        }
+        appendCurrent(parseInt(e.value))
       }
       else{
-        secondNumber=secondNumber*10+parseInt(e.value);
+        if (pointCounter>0){
+          secondNumber=secondNumber+parseInt(e.value)/(10**pointCounter);
+          pointCounter+=1;
+        }
+        else{
+          secondNumber=secondNumber*10+parseInt(e.value);
+        }
         appendCurrent(parseInt(e.value));
       }
     console.log(secondNumber)
@@ -104,11 +131,15 @@ function getClick(e){
         clearLast();
         clearCurrent();
         appendLast(firstNumber); 
+        pointCounter=0;
       }
       else{
         appendLast('=');
         clearCurrent();
         appendCurrent(firstNumber);
+        if (Number.isInteger(firstNumber)===false){
+          pointCounter=(currentOperationScreen.textContent.split(".").slice(-1)).length+1;
+        }
       }
       secondNumber=null;
       operator=null;
@@ -147,7 +178,9 @@ function getClick(e){
         appendLast('^');
         clearCurrent();
       }
+      pointCounter=0;
     }
+    
     console.log(operator)  
   }
   else if (e.classList[0]==="special-operators"){
@@ -162,7 +195,13 @@ function getClick(e){
               firstNumber=null;
             }
             else{
-              firstNumber=Math.floor(firstNumber/10);
+              if (Number.isInteger(firstNumber)) {
+                firstNumber=Math.floor(firstNumber/10);
+              }
+              else{
+                firstNumber=Math.floor(firstNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                pointCounter=pointCounter-1;
+              }
               currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);
             }
           }
@@ -175,15 +214,28 @@ function getClick(e){
             firstNumber=null;
             operator=null;
             secondNumber=null;
+            pointCounter=0;
           }
           else{
-            currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1); 
             if (operator===null){
-              firstNumber=Math.floor(firstNumber/10);
+              if(Number.isInteger(firstNumber)){
+                firstNumber=Math.floor(firstNumber/10);
+              }
+              else{
+                firstNumber=Math.floor(firstNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                pointCounter=pointCounter-1;
+              }
             }
             else{
-              secondNumber=Math.floor(secondNumber/10);
-            }          
+              if(Number.isInteger(secondNumber)){
+                secondNumber=Math.floor(secondNumber/10);
+              }
+              else{
+                secondNumber=Math.floor(secondNumber*10**(pointCounter-2))/10**(pointCounter-2);
+                pointCounter=pointCounter-1;
+              }
+            }
+            currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);         
           }
         }
         else{
@@ -191,6 +243,12 @@ function getClick(e){
           lastOperationScreen.textContent='';
           operator=null;
           secondNumber=null;
+          if(currentOperationScreen.textContent.includes(".")){
+            pointCounter=(currentOperationScreen.textContent.split(".").slice(-1)).length+1;
+          }
+          else{
+            pointCounter=0;
+          }
         }
       }
       else{
@@ -200,7 +258,13 @@ function getClick(e){
             secondNumber=null;
           }
           else{
-            secondNumber=Math.floor(secondNumber/10);
+            if(Number.isInteger(secondNumber)){
+              secondNumber=Math.floor(secondNumber/10);
+            }
+            else{
+              secondNumber=Math.floor(secondNumber*10**(pointCounter-2))/10**(pointCounter-2);
+              pointCounter=pointCounter-1;
+            }
             currentOperationScreen.textContent=currentOperationScreen.textContent.slice(0,-1);          
           }
         }
@@ -209,7 +273,16 @@ function getClick(e){
           lastOperationScreen.textContent='';
           operator=null;
           secondNumber=null;
+          if (Number.isInteger(firstNumber)===false){
+            pointCounter=(currentOperationScreen.textContent.split(".").slice(-1)).length+1;
+          }
         }
+      }
+    }
+    else if (e.id==="point"){
+      if (pointCounter===0){
+        pointCounter+=1;
+        currentOperationScreen.textContent=currentOperationScreen.textContent+'.'
       }
     }
   }
